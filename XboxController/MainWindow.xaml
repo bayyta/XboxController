@@ -1,0 +1,65 @@
+﻿<Window x:Name="XboxWindow" x:Class="XboxController.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:XboxController"
+        mc:Ignorable="d"
+        Title="Xbox Controller" Height="800" Width="1200" MinHeight="500" MinWidth="800" WindowStartupLocation="CenterScreen" WindowStyle="None" Background="{x:Null}" AllowsTransparency="True" Foreground="{x:Null}" Left="Auto" Top="Auto" StateChanged="XboxWindow_StateChanged" Loaded="XboxWindow_Loaded" Closing="XboxWindow_Closing" WindowState="Minimized">
+    <Window.Style>
+        <Style TargetType="{x:Type Window}">
+            <Setter Property="WindowChrome.WindowChrome">
+                <Setter.Value>
+                    <WindowChrome />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Window}">
+                        <Border BorderThickness="0" BorderBrush="#FF878787">
+                            <Border x:Name="maximizeBorder" BorderThickness="0" BorderBrush="#FF2B2B2E">
+                                <Grid Background="Black">
+                                    <!--<Grid.Background>
+                                        <ImageBrush ImageSource="imgs/background.png"/>
+                                    </Grid.Background>-->
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="1*"/>
+                                            <RowDefinition Height="285"/>
+                                            <RowDefinition Height="1*"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Image x:Name="controller" Visibility="Visible" Grid.Row="1" Grid.Column="1" Source="imgs/controller.png" Width="406" Height="285" IsHitTestVisible="False" Stretch="Uniform" HorizontalAlignment="Left" />
+
+                                        <Label HorizontalAlignment="Right" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" Width="200" FontSize="16" Height="40" FontWeight="Normal" FontFamily="Segoe UI Semibold" Margin="0,0,160,0" Foreground="White" Content="Controller button:"/>
+                                        <ComboBox x:Name="comboBox_buttons" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" Width="200" Loaded="comboBox_buttons_Loaded" IsTabStop="False" Background="Black" BorderBrush="#FFD61ABD" Foreground="Black" FontSize="16" Height="32" FontWeight="Normal" FontFamily="Nirmala UI" Margin="0,40,160,0" MaxDropDownHeight="380" SelectionChanged="comboBox_buttons_SelectionChanged" VerticalContentAlignment="Center" Padding="6,0,0,0"/>
+
+                                        <Label HorizontalAlignment="Right" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" Width="200" FontSize="16" Height="40" FontWeight="Normal" FontFamily="Segoe UI Semibold" Margin="0,118,160,0" Foreground="White" Content="Map to:"/>
+
+                                        <ComboBox x:Name="comboBox_keys" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" Width="200" Loaded="comboBox_keys_Loaded" IsTabStop="False" Background="Black" BorderBrush="#FFD61ABD" Foreground="Black" FontSize="16" Height="32" FontWeight="Normal" FontFamily="Nirmala UI" Margin="0,158,160,0" MaxDropDownHeight="380" SelectionChanged="comboBox_keys_SelectionChanged" Padding="6,0,0,0" VerticalContentAlignment="Center"/>
+                                        <Label HorizontalAlignment="Right" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" Width="200" FontSize="14" Height="30" FontWeight="Normal" FontFamily="Segoe UI Semibold" Margin="0,190,160,0" Foreground="#FF818181" Content="(Choose a functional key)"/>
+
+                                        <Label HorizontalAlignment="Right" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" Width="200" FontSize="16" Height="40" FontWeight="Normal" FontFamily="Segoe UI Semibold" Margin="0,220,160,0" Foreground="White" Content="or"/>
+
+                                        <TextBox x:Name="textbox_Key" Style="{StaticResource TextBoxStyle}" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" TextAlignment="Left" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" TextWrapping="NoWrap" Foreground="White" Margin="0,260,160,0" FontSize="16" SelectionBrush="#FF12810C" BorderThickness="1" FontFamily="Segoe UI Semibold" Height="32" Width="200" MaxLength="1" KeyDown="textbox_setKey_KeyDown" HorizontalAlignment="Right" VerticalAlignment="Top" CaretBrush="White" BorderBrush="{x:Null}" Padding="4,1,1,1" />
+                                        <Label HorizontalAlignment="Right" Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" Width="225" FontSize="14" Height="30" FontWeight="Normal" FontFamily="Segoe UI Semibold" Margin="0,7,135,0" Foreground="#FF818181" Content="(Type in desired letter or number)"/>
+
+                                        <Button x:Name="button_Restore" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" Width="200" FontSize="14" Height="32" FontWeight="Normal" FontFamily="Segoe UI Semibold" Margin="0,87,160,0" Foreground="Black" Content="Restore default" Click="button_Restore_Click"/>
+                                    </Grid>
+
+                                    <Image x:Name="minimize" Height="12" Width="12" PreviewMouseLeftButtonDown="minimize_MouseDown" PreviewMouseLeftButtonUp="minimize_MouseUp" Margin="0,10,44,0" HorizontalAlignment="Right" VerticalAlignment="Top" WindowChrome.IsHitTestVisibleInChrome="True" MouseEnter="minimize_MouseEnter" OpacityMask="{x:Null}" Source="imgs/minimize.png" MouseLeave="minimize_MouseLeave"/>
+                                    <Image x:Name="maximize" Height="12" Width="12" PreviewMouseLeftButtonDown="maximize_MouseDown" PreviewMouseLeftButtonUp="maximize_MouseUp" Margin="0,10,27,0" HorizontalAlignment="Right" VerticalAlignment="Top" WindowChrome.IsHitTestVisibleInChrome="True" Source="imgs/maximize.png" MouseEnter="maximize_MouseEnter" MouseLeave="maximize_MouseLeave"/>
+                                    <Image x:Name="close" Height="12" Width="12" PreviewMouseLeftButtonDown="close_MouseDown" PreviewMouseLeftButtonUp="close_MouseUp" Margin="0,10,10,0" HorizontalAlignment="Right" VerticalAlignment="Top" WindowChrome.IsHitTestVisibleInChrome="True" Source="imgs/close.png" MouseEnter="close_MouseEnter" MouseLeave="close_MouseLeave"/>
+                                </Grid>
+                            </Border>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Style>
+</Window>
